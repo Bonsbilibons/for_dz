@@ -5,10 +5,8 @@
 #include <string.h>
 using namespace std; // раскрытие пространства имён, в котором объявлены cin и cout
 
- // дескриптор (уникльный номер окна) - нужен для окрашивания и установки координат 
-
 // прототипы функций:
-void options(int cols, int lines); // настройка размеров и расположения окна, установка заголовка, скрытие мигающего курсора
+void options_of_window(int cols, int lines); // настройка размеров и расположения окна, установка заголовка, скрытие мигающего курсора
 void intro(); // заставка
 void menu(); // три пункта меню
 void letter(int x, int y, int forecolor, int backcolor, char symb); // рисование квадрата с буквой для заставки
@@ -27,7 +25,7 @@ void main()
 {
 	set_title("simulator");
 	transparent_cursor(true);
-	options(130, 50);
+	options_of_window(130, 50);
 	intro();
 	menu();
 }
@@ -71,11 +69,12 @@ void set_title(string title)
 	system(("title " + title).c_str());  // не смог самостоятельно вставить параметр title для system("title") :( , по етому спросил чат жпт как ето сделать :)
 }
 
-void options(int cols, int lines)
+void options_of_window(int cols, int lines)
 {
 	string param1 = ("mode con cols=" + cols);
 	string param2 = (" cols=" + lines);
 	system((param1 + param2).c_str()); // размер окна - 130х50 символов
+	//следующую функцию решил оставить здесь, так как не вижу смьісла ее вьіносить 
 	MoveWindow(GetConsoleWindow(), 50, 50, 2000, 2000, true); // двигаем окно: консольное окно ставится в точку 50 пикселей по иксу и 50 по игреку относительно рабочего стола
 	// 2000х2000 - максимальные размеры окна, тру - перерисовка (обычно это имеет значение для приложений под виндовс)
 }

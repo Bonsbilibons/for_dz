@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="spravka.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
 </Project>
