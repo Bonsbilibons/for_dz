@@ -1,0 +1,3 @@
+﻿  Recursion.cpp
+C:\Users\HP\source\repos\C++Shag\Recursion\Recursion\Recursion.cpp(116): warning C4715: 'sumFromLeft': not all control paths return a value
+  Recursion.vcxproj -> C:\Users\HP\source\repos\C++Shag\Recursion\x64\Debug\Recursion.exe
