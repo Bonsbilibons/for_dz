@@ -115,6 +115,42 @@ int sumFromLeft(int number) {
 	cout << result << " ";
 }
 
+int fibonachi(int index) {
+	static int counter = 0;
+	counter++;
+	cout << counter << "\n";
+	if (index == 0) {
+		return 0;
+	}
+	if (index == 1) {
+		return 1;
+	}
+	return fibonachi(index - 1) + fibonachi(index - 2);
+}
+
+void reverse_number(int number) {
+	int x = number;
+	if (number != 0) {
+		cout << x % 10;
+		reverse_number(number / 10);
+	}
+}
+
+int degree_of_number(int number, int degree) {
+	if (degree != 1) {
+		return degree_of_number(number*number, degree - 1);
+	}
+	return number;
+}
+
+int countFromAToB(int start, int finish) {
+	static int counter = start;
+	if (start < finish) {
+		counter += start + 1;
+		return countFromAToB(start + 1, finish);
+	}
+	return counter;
+}
 
 
 int main(){
@@ -127,6 +163,13 @@ int main(){
 
 	//cout << sumFromRight(179);
 
-	sumFromLeft(179);
+	//sumFromLeft(179);
 
+	//cout << fibonachi(12);
+
+	/*reverse_number(321);*/
+
+	//cout << degree_of_number(5, 3);
+
+	cout << countFromAToB(100, 1000);
 }
