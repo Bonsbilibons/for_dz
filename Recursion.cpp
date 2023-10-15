@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 /* int main()
@@ -35,7 +35,11 @@ using namespace std;
 //	cout << x << "\n";
 //} 
 
-
+//<summary>
+// Count from one to your number
+//</summary>
+//< param name ="n">End point of counting</param>
+//<returns>Show count in console</returns>
 void fromOneToN(int n) {
 	int y = n;
 	static int x = 1;
@@ -50,6 +54,12 @@ void fromOneToN(int n) {
 	}
 }
 
+//<summary>
+// Count in diapason from a to b
+//</summary>
+//< param name ="a">Start point of counting</param>
+//< param name ="b">End point of counting</param>
+//<returns>Show count in console</returns>
 void fromAToB(int a, int b) {
 	static int primary_a = a;
 	static int primary_b = b;
@@ -80,6 +90,11 @@ void fromAToB(int a, int b) {
 	}
 }
 
+//<summary>
+// Check is number is degree of two
+//</summary>
+//< param name ="number">Number for checking</param>
+//<returns>Show in console is number is degree of two</returns>
 void isDegreeOfTwo(float number) {
 	if (number == 2) {
 		cout << "YES";
@@ -94,6 +109,11 @@ void isDegreeOfTwo(float number) {
 	}
 }
 
+//<summary>
+// Count sum of every separated number from right side
+//</summary>
+//< param name ="number">Your number for summing</param>
+//<returns>Return sum of every separated number from right side </returns>
 int sumFromRight(int number) {
 	static int result = 0;
 	if (number == 0) {
@@ -104,6 +124,11 @@ int sumFromRight(int number) {
 	}
 }
 
+//<summary>
+// Count sum of every separated number from left side
+//</summary>
+//< param name ="number">Your number for summing</param>
+//<returns>Return sum of every separated number from left side </returns>
 int sumFromLeft(int number) {
 	int result = number % 10;
 	if (number == 0) {
@@ -115,7 +140,12 @@ int sumFromLeft(int number) {
 	cout << result << " ";
 }
 
-int fibonachi(int index) {
+//<summary>
+// Calculate fibonacci numeric
+//</summary>
+//< param name ="index">Index of end point of fibonacci numeric</param>
+//<returns>Return fibonacci numeric of preseted number </returns>
+int fibonacci(int index) {
 	static int counter = 0;
 	counter++;
 	cout << counter << "\n";
@@ -125,9 +155,14 @@ int fibonachi(int index) {
 	if (index == 1) {
 		return 1;
 	}
-	return fibonachi(index - 1) + fibonachi(index - 2);
+	return fibonacci(index - 1) + fibonacci(index - 2);
 }
 
+//<summary>
+// Reverse number
+//</summary>
+//< param name ="number">Number to reverse</param>
+//<returns>Show reversed numeric in console</returns>
 void reverse_number(int number) {
 	int x = number;
 	if (number != 0) {
@@ -136,6 +171,12 @@ void reverse_number(int number) {
 	}
 }
 
+//<summary>
+// Calculate degree of numeric
+//</summary>
+//< param name ="number">Number you want to raise to a power</param>
+//< param name ="degree">Degree what you want to use of number</param>
+//<returns>Return number in power </returns>
 int degree_of_number(int number, int degree) {
 	if (degree != 1) {
 		return degree_of_number(number*number, degree - 1);
@@ -143,6 +184,12 @@ int degree_of_number(int number, int degree) {
 	return number;
 }
 
+//<summary>
+// Count in diapason from a to b
+//</summary>
+//< param name ="a">Start point of counting</param>
+//< param name ="b">End point of counting</param>
+//<returns>Show count in console</returns>
 int countFromAToB(int start, int finish) {
 	static int counter = start;
 	if (start < finish) {
