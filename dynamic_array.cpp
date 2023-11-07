@@ -1,33 +1,34 @@
 #include <iostream>
 #include <ctime>
+#include <windows.h>   
 using namespace std;
 
-void SetSize(unsigned int size, int x, int y) {
-    if (size > y || size < x) {
-        cout << "wrong argument";
-    };
-}
-
-void AllocateMemory(int** array, int size) {
-    *array = new int[size];
-}
-
-void FillArray(int* array, int size, int min, int max) {
-    srand(time(NULL));
-    for (int i = 0; i <= size - 1; i++) {
-        array[i] = min + (rand() % (max - min));
-    }
-}
-
-void ShowArray(int* array, int size) {
-    for (int i = 0; i <= size - 1; i++) {
-        cout << array[i] << " ";
-    }
-}
-
-void FreeMemory(int* array) {
-    delete[] array;
-}
+//void SetSize(unsigned int size, int x, int y) {
+//    if (size > y || size < x) {
+//        cout << "wrong argument";
+//    };
+//}
+//
+//void AllocateMemory(int** array, int size) {
+//    *array = new int[size];
+//}
+//
+//void FillArray(int* array, int size, int min, int max) {
+//    srand(time(NULL));
+//    for (int i = 0; i <= size - 1; i++) {
+//        array[i] = min + (rand() % (max - min));
+//    }
+//}
+//
+//void ShowArray(int* array, int size) {
+//    for (int i = 0; i <= size - 1; i++) {
+//        cout << array[i] << " ";
+//    }
+//}
+//
+//void FreeMemory(int* array) {
+//    delete[] array;
+//}
 
 int main()
 {
@@ -84,7 +85,7 @@ int main()
     //delete[] array;
 
 
-    unsigned int size;
+   /* unsigned int size;
     cout << "enter size \n";
     cin >> size; 
 
@@ -95,5 +96,33 @@ int main()
 
     FillArray(array, size, 10, 100);
     ShowArray(array, size);
-    FreeMemory(array);
+    FreeMemory(array);*/
+
+
+
+    unsigned int wedth;
+    unsigned int height;
+    cout << "Enter rows and columns";
+    cin >> wedth;
+    cin >> height;
+    
+    int** array = new int* [wedth];
+
+    for (int y = 0; y < height; y++) {
+        array[y] = new int[wedth];
+        for (int x = 0; x < wedth; x++) {
+            array[y][x] = rand() % 100;
+            cout << array[y][x] << " ";
+            Sleep(rand() % 1000);
+        }
+        Sleep(100);
+        cout << "\n";
+    }
+
+    for (int y = 0; y < height; y++) {
+        delete[] array[y];
+    }
+    delete[] array;
+
+
 }
