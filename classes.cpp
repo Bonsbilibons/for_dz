@@ -1,33 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
-class Customer
-{
-public:
-	double min_budget;
-	double max_budget;
-	bool discount_card;
-	bool club_card;
-	bool cash_or_wire;
-	string name;
-	string surname;
-	string adress;
-	bool has_package;
-	void SpendMoney()
-	{
-		cout << "spend\n";
-	}
-	void SelectProduct()
-	{
-		cout << "brainwashing....\n";
-	}
-	void SaySomething()
-	{
-		cout << "I don`t need a package\n";
-	}
-};
-
 class Pencil
 {
 public:
@@ -238,6 +211,57 @@ public:
 	{
 		return this->length_of_tail;
 	}
+
+
+	/*void scratchPerson(Person& person)
+	{
+		person.health -= 5;
+		cout << "MEOOW!\n";
+	}*/
+};
+
+class Person
+{
+public:
+	string name;
+	string surname;
+	int age;
+	double weight;
+	double money;
+	int health = 100;
+	int energy = 100;
+	Person(string name, string surname, int age, double weight, double money, int health = 100, int energy = 100)
+	{
+		this->name = name;
+		this->surname = surname;
+		this->age = age;
+		this->weight = weight;
+		this->money = money;
+		this->health = health;
+		this->energy = energy;
+	}
+
+	void print()
+	{
+		cout << "Name: " << this->name << "\n";
+		cout << "Surname: " << this->surname << "\n";
+		cout << "Age: " << this->age << "\n";
+		cout << "Weight " << this->weight << "\n";
+		cout << "Money " << this->money << "\n";
+		cout << "Health " << this->health << "\n";
+		cout << "Energy: " << this->energy << "\n";
+	}
+
+	void PaintCat(Cat& cat, string color)
+	{
+		cat.SetColor(color);
+		cout << "Cat is angry! It`s new color is " << cat.color << "\n";
+	}
+
+	void ChangeInkInPencil(Pencil& pencil, string color)
+	{
+		pencil.SetInkColor(color);
+	}
 };
 
 class Jacket
@@ -304,10 +328,17 @@ public:
 	{
 		return this->still_being_produced;
 	}
+
+	void BurstItself(Person& person)
+	{
+		person.money -= 200;
+		cout << "Time for a diet \n";
+	}
 };
 
 class Monitor
 {
+public:
 	string brand;
 	string model;
 	string type_of_panel;
@@ -369,14 +400,26 @@ class Monitor
 	{
 		return this->size_in_inches;
 	}
+
+	void ShowCamedyShow(Person& person)
+	{
+		person.energy += 10;
+		cout << "AHAHAHHAHAHHAHA\n";
+	}
 };
-
-
-
-
 
 int main()
 {
-	Pencil pencil("Blue", "ball", "53791ILG", "Alex", "Gell");
-	pencil.ShowObjectData();
+	Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
+	Pencil pencil("Blue", "ball", "53791ILG", character.name , "Gell");
+	Monitor old_monitor("LG", "JGKF12", "LCD", 59, 27);
+	Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.name);
+	Cat his_cat("red", "homeless", "brown", false, 3);
+	Jacket his_jacker("Louis Vuitton", "Very Old Money", "46", "cotton", false);
+
+	character.PaintCat(his_cat, "blue");
+	//his_cat.scratchPerson(character);
+	character.ChangeInkInPencil(pencil, "Black");
+	old_monitor.ShowCamedyShow(character);
+	his_jacker.BurstItself(character);
 }
