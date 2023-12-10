@@ -3,12 +3,13 @@ using namespace std;
 
 class Pencil
 {
-public:
+private:
 	string ink_color;
 	string type;
 	string serial_number;
 	string owner;
 	string type_of_ink;
+public:
 	Pencil(string ink_color, string type, string serial_number, string owner, string type_of_ink)
 	{
 		this->ink_color = ink_color;
@@ -70,13 +71,14 @@ public:
 
 class Laptop
 {
-public:
+private:
 	string processor;
 	int memory;
 	int static_memory;
 	string videocard;
 	string serial_number;
 	string owner;
+public:
 	Laptop(string processor, int memory, int static_memory, string videocard, string serial_number, string owner)
 	{
 		this->processor = processor;
@@ -149,12 +151,13 @@ public:
 
 class Cat
 {
-public:
+private:
 	string color;
 	string breed;
 	string color_of_eyes;
 	bool passport;
 	short length_of_tail;
+public:
 	Cat(string color, string breed, string color_of_eyes, bool passport, short length_of_tail)
 	{
 		this->color = color;
@@ -222,7 +225,7 @@ public:
 
 class Person
 {
-public:
+private:
 	string name;
 	string surname;
 	int age;
@@ -230,6 +233,7 @@ public:
 	double money;
 	int health = 100;
 	int energy = 100;
+public:
 	Person(string name, string surname, int age, double weight, double money, int health = 100, int energy = 100)
 	{
 		this->name = name;
@@ -255,23 +259,49 @@ public:
 	void PaintCat(Cat& cat, string color)
 	{
 		cat.SetColor(color);
-		cout << "Cat is angry! It`s new color is " << cat.color << "\n";
+		cout << "Cat is angry! It`s new color is " << cat.GetColor() << "\n";
 	}
 
 	void ChangeInkInPencil(Pencil& pencil, string color)
 	{
 		pencil.SetInkColor(color);
 	}
+
+	void SetMoney(double money)
+	{
+		this->money = money;
+	}
+
+	void AddMoney(double money)
+	{
+		this->money += money;
+	}
+
+	void AddEnergy(int energy)
+	{
+		this->energy += energy;
+	}
+
+	double GetMoney()
+	{
+		return this->money;
+	}
+
+	string GetName()
+	{
+		return this->name;
+	}
 };
 
 class Jacket
 {
-public:
+private:
 	string brand;
 	string model;
 	string size;
 	string material;
 	bool still_being_produced;
+public:
 	Jacket(string brand, string model, string size, string material, bool still_being_produced)
 	{
 		this->brand = brand;
@@ -331,19 +361,20 @@ public:
 
 	void BurstItself(Person& person)
 	{
-		person.money -= 200;
+		person.SetMoney(-200);
 		cout << "Time for a diet \n";
 	}
 };
 
 class Monitor
 {
-public:
+private:
 	string brand;
 	string model;
 	string type_of_panel;
 	unsigned short speed_in_hz;
 	unsigned short size_in_inches;
+public:
 	Monitor(string brand, string model, string type_of_panel, unsigned short speed_in_hz, unsigned short size_in_inches)
 	{
 		this->brand = brand;
@@ -403,7 +434,7 @@ public:
 
 	void ShowCamedyShow(Person& person)
 	{
-		person.energy += 10;
+		person.AddEnergy(10);
 		cout << "AHAHAHHAHAHHAHA\n";
 	}
 };
@@ -411,9 +442,9 @@ public:
 int main()
 {
 	Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
-	Pencil pencil("Blue", "ball", "53791ILG", character.name , "Gell");
+	Pencil pencil("Blue", "ball", "53791ILG", character.GetName(), "Gell");
 	Monitor old_monitor("LG", "JGKF12", "LCD", 59, 27);
-	Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.name);
+	Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.GetName());
 	Cat his_cat("red", "homeless", "brown", false, 3);
 	Jacket his_jacker("Louis Vuitton", "Very Old Money", "46", "cotton", false);
 
