@@ -439,18 +439,110 @@ public:
 	}
 };
 
+class Counter
+{
+private:
+	int count;
+	int step;
+	int limit;
+	int minimum;
+public:
+	Counter(int count = 0, int step = 1, int limit = 99999, int minimum = 0)
+	{
+		this->count = count;
+		this->step = step;
+		this->limit = limit;
+		this->minimum = minimum;
+	}
+
+	void SetCount(int count)
+	{
+		if (count > this->limit || count < this->minimum)
+		{
+			throw "Error!";
+		}
+		this->count = count;
+	}
+	void SetStep(int step)
+	{
+		if (step > this->limit || step < this->minimum)
+		{
+			throw "Error!";
+		}
+		this->step = step;
+	}
+	void SetLimit(int limit)
+	{
+		if (limit < this->minimum)
+		{
+			throw "Error!";
+		}
+		this->limit = limit;
+	}
+	void SetMinimum(int minimum)
+	{
+		if (minimum > this->limit)
+		{
+			throw "Error!";
+		}
+		this->minimum = minimum;
+	}
+	
+	int GetCount()
+	{
+		return this->count;
+	}
+	int GetStep()
+	{
+		return this->step;
+	}
+	int GetLimit()
+	{
+		return this->limit;
+	}
+	int GetMinimum()
+	{
+		return this->minimum;
+	}
+
+	void Plus()
+	{
+		this->count += this->step;
+		if (this->count > this->limit)
+		{
+			this->count = this->count - this->limit;
+		}
+	}
+	void Reset()
+	{
+		this->count = 0;
+	}
+
+};
+
 int main()
 {
-	Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
-	Pencil pencil("Blue", "ball", "53791ILG", character.GetName(), "Gell");
-	Monitor old_monitor("LG", "JGKF12", "LCD", 59, 27);
-	Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.GetName());
-	Cat his_cat("red", "homeless", "brown", false, 3);
-	Jacket his_jacker("Louis Vuitton", "Very Old Money", "46", "cotton", false);
+	//Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
+	//Pencil pencil("Blue", "ball", "53791ILG", character.GetName(), "Gell");
+	//Monitor old_monitor("LG", "JGKF12", "LCD", 59, 27);
+	//Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.GetName());
+	//Cat his_cat("red", "homeless", "brown", false, 3);
+	//Jacket his_jacker("Louis Vuitton", "Very Old Money", "46", "cotton", false);
 
-	character.PaintCat(his_cat, "blue");
-	//his_cat.scratchPerson(character);
-	character.ChangeInkInPencil(pencil, "Black");
-	old_monitor.ShowCamedyShow(character);
-	his_jacker.BurstItself(character);
+	//character.PaintCat(his_cat, "blue");
+	////his_cat.scratchPerson(character);
+	//character.ChangeInkInPencil(pencil, "Black");
+	//old_monitor.ShowCamedyShow(character);
+	//his_jacker.BurstItself(character);
+
+	Counter counter;
+	cout << counter.GetCount() << "\n";
+	counter.SetCount(99998);
+	cout << counter.GetCount() << "\n";
+	counter.Reset();
+	counter.Plus();
+	cout << counter.GetCount() << "\n";
+	counter.Plus();
+	cout << counter.GetCount() << "\n";
+
 }
