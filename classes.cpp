@@ -18,7 +18,7 @@ public:
 		this->owner = owner;
 		this->type_of_ink = type_of_ink;
 	}
-	void ShowObjectData()
+	void ShowObjectData() const
 	{
 		cout << "Ink color: " << this->ink_color << "\n";
 		cout << "Type: " << this->type << "\n";
@@ -30,7 +30,7 @@ public:
 	{
 		this->ink_color = color;
 	}
-	string GetInkColor()
+	string GetInkColor() const
 	{
 		return this->ink_color;
 	}
@@ -38,7 +38,7 @@ public:
 	{
 		this->type = pencil_type;
 	}
-	string GetType()
+	string GetType() const 
 	{
 		return this->type;
 	}
@@ -46,7 +46,7 @@ public:
 	{
 		this->serial_number = serial;
 	}
-	string GetSerialNumber()
+	string GetSerialNumber() const 
 	{
 		return this->serial_number;
 	}
@@ -54,7 +54,7 @@ public:
 	{
 		this->owner = pencil_owner;
 	}
-	string GetOwner()
+	string GetOwner() const 
 	{
 		return this->owner;
 	}
@@ -62,7 +62,7 @@ public:
 	{
 		this->type_of_ink = ink_type;
 	}
-	string GetTypeOfInk()
+	string GetTypeOfInk() const 
 	{
 		return this->type_of_ink;
 	}
@@ -88,7 +88,7 @@ public:
 		this->serial_number = serial_number;
 		this->owner = owner;
 	}
-	void ShowObjectData()
+	void ShowObjectData() const
 	{
 		cout << "Processor: " << this->processor << "\n";
 		cout << "Memory: " << this->memory << "\n";
@@ -101,7 +101,7 @@ public:
 	{
 		this->processor = processor_value;
 	}
-	string GetProcessor()
+	string GetProcessor() const
 	{
 		return this->processor;
 	}
@@ -109,7 +109,7 @@ public:
 	{
 		this->memory = memory_value;
 	}
-	int GetMemory()
+	int GetMemory() const
 	{
 		return this->memory;
 	}
@@ -117,7 +117,7 @@ public:
 	{
 		this->static_memory = static_memory_value;
 	}
-	int GetStaticMemory()
+	int GetStaticMemory() const
 	{
 		return this->static_memory;
 	}
@@ -125,7 +125,7 @@ public:
 	{
 		this->videocard = videocard_value;
 	}
-	string GetVideocard()
+	string GetVideocard() const
 	{
 		return this->videocard;
 	}
@@ -133,7 +133,7 @@ public:
 	{
 		this->serial_number = serial_number_value;
 	}
-	string GetSerialNumber()
+	string GetSerialNumber() const
 	{
 		return this->serial_number;
 	}
@@ -142,7 +142,7 @@ public:
 		this->owner = owner_value;
 	}
 
-	string GetOwner()
+	string GetOwner() const
 	{
 		return this->owner;
 	}
@@ -166,7 +166,7 @@ public:
 		this->passport = passport;
 		this->length_of_tail = length_of_tail;
 	}
-	void ShowObjectData()
+	void ShowObjectData() const
 	{
 		cout << "Color: " << this->color << "\n";
 		cout << "Breed: " << this->breed << "\n";
@@ -178,7 +178,7 @@ public:
 	{
 		this->color = color_value;
 	}
-	string GetColor()
+	string GetColor() const
 	{
 		return this->color;
 	}
@@ -186,7 +186,7 @@ public:
 	{
 		this->breed = breed_value;
 	}
-	string GetBreed()
+	string GetBreed() const
 	{
 		return this->breed;
 	}
@@ -194,7 +194,7 @@ public:
 	{
 		this->color_of_eyes = color_of_eyes_value;
 	}
-	string GetColorOfEyes()
+	string GetColorOfEyes() const
 	{
 		return this->color_of_eyes;
 	}
@@ -202,7 +202,7 @@ public:
 	{
 		this->passport = passport_value;
 	}
-	bool HasPassport()
+	bool HasPassport() const
 	{
 		return this->passport;
 	}
@@ -210,7 +210,7 @@ public:
 	{
 		this->length_of_tail = length_of_tail_value;
 	}
-	short GetLengthOfTail()
+	short GetLengthOfTail() const
 	{
 		return this->length_of_tail;
 	}
@@ -245,7 +245,7 @@ public:
 		this->energy = energy;
 	}
 
-	void print()
+	void print() const
 	{
 		cout << "Name: " << this->name << "\n";
 		cout << "Surname: " << this->surname << "\n";
@@ -282,12 +282,30 @@ public:
 		this->energy += energy;
 	}
 
-	double GetMoney()
+	Person& SetName(string name)
+	{
+		this->name = name;
+		return *this;
+	}
+
+	Person& SetSurname(string surname)
+	{
+		this->surname = surname;
+		return *this;
+	}
+
+	Person& SetHealth(int health)
+	{
+		this->health = health;
+		return *this;
+	}
+
+	double GetMoney() const
 	{
 		return this->money;
 	}
 
-	string GetName()
+	string GetName() const
 	{
 		return this->name;
 	}
@@ -310,7 +328,7 @@ public:
 		this->material = material;
 		this->still_being_produced = still_being_produced;
 	}
-	void ShowObjectData()
+	void ShowObjectData() const
 	{
 		cout << "Brand: " << this->brand << "\n";
 		cout << "Model: " << this->model << "\n";
@@ -322,7 +340,7 @@ public:
 	{
 		this->brand = brand_value;
 	}
-	string GetBrand()
+	string GetBrand() const
 	{
 		return this->brand;
 	}
@@ -330,7 +348,7 @@ public:
 	{
 		this->model = model_value;
 	}
-	string GetModel()
+	string GetModel() const
 	{
 		return this->model;
 	}
@@ -338,7 +356,7 @@ public:
 	{
 		this->size = size_value;
 	}
-	string GetSize()
+	string GetSize() const
 	{
 		return this->size;
 	}
@@ -346,7 +364,7 @@ public:
 	{
 		this->material = material_value;
 	}
-	string GetMaterial()
+	string GetMaterial() const
 	{
 		return this->material;
 	}
@@ -354,7 +372,7 @@ public:
 	{
 		this->still_being_produced = still_being_produced_value;
 	}
-	bool IsStillBeingProduced()
+	bool IsStillBeingProduced() const
 	{
 		return this->still_being_produced;
 	}
@@ -383,7 +401,7 @@ public:
 		this->speed_in_hz = speed_in_hz;
 		this->size_in_inches = size_in_inches;
 	}
-	void ShowObjectData()
+	void ShowObjectData() const
 	{
 		cout << "Brand: " << this->brand << "\n";
 		cout << "Model: " << this->model << "\n";
@@ -395,7 +413,7 @@ public:
 	{
 		this->brand = brand_value;
 	}
-	string GetBrand()
+	string GetBrand() const
 	{
 		return this->brand;
 	}
@@ -403,7 +421,7 @@ public:
 	{
 		this->model = model_value;
 	}
-	string GetModel()
+	string GetModel() const
 	{
 		return this->model;
 	}
@@ -411,7 +429,7 @@ public:
 	{
 		this->type_of_panel = type_of_panel_value;
 	}
-	string GetTypeOfPanel()
+	string GetTypeOfPanel() const
 	{
 		return this->type_of_panel;
 	}
@@ -419,7 +437,7 @@ public:
 	{
 		this->speed_in_hz = speed_in_hz_value;
 	}
-	unsigned short GetRefreshRate()
+	unsigned short GetRefreshRate() const
 	{
 		return this->speed_in_hz;
 	}
@@ -427,7 +445,7 @@ public:
 	{
 		this->size_in_inches = size_in_inches_value;
 	}
-	unsigned short GetSizeInInches()
+	unsigned short GetSizeInInches() const
 	{
 		return this->size_in_inches;
 	}
@@ -488,19 +506,19 @@ public:
 		this->minimum = minimum;
 	}
 	
-	int GetCount()
+	int GetCount() const  
 	{
 		return this->count;
 	}
-	int GetStep()
+	int GetStep() const 
 	{
 		return this->step;
 	}
-	int GetLimit()
+	int GetLimit() const
 	{
 		return this->limit;
 	}
-	int GetMinimum()
+	int GetMinimum() const 
 	{
 		return this->minimum;
 	}
@@ -522,7 +540,9 @@ public:
 
 int main()
 {
-	//Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
+	Person character("Biba", "Bobovich", 24, 104, 0, 71, 85);
+	character.SetName("Boba").SetHealth(100);
+
 	//Pencil pencil("Blue", "ball", "53791ILG", character.GetName(), "Gell");
 	//Monitor old_monitor("LG", "JGKF12", "LCD", 59, 27);
 	//Laptop his_laptop("Ryzen 7 6800", 16, 1024, "RTX3070Ti", "OIHGO325IH235", character.GetName());
@@ -535,7 +555,7 @@ int main()
 	//old_monitor.ShowCamedyShow(character);
 	//his_jacker.BurstItself(character);
 
-	Counter counter;
+	/*Counter counter;
 	cout << counter.GetCount() << "\n";
 	counter.SetCount(99998);
 	cout << counter.GetCount() << "\n";
@@ -543,6 +563,6 @@ int main()
 	counter.Plus();
 	cout << counter.GetCount() << "\n";
 	counter.Plus();
-	cout << counter.GetCount() << "\n";
+	cout << counter.GetCount() << "\n";*/
 
 }
