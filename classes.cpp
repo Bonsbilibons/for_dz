@@ -10,13 +10,22 @@ private:
 	string owner;
 	string type_of_ink;
 public:
+	Pencil()
+	{
+		SetInkColor("Black");
+		SetType("Ball-point");
+		SetSerialNumber("12345qwert");
+		SetOwner("Person");
+		SetTypeOfInk("Gell");
+	}
+
 	Pencil(string ink_color, string type, string serial_number, string owner, string type_of_ink)
 	{
-		this->ink_color = ink_color;
-		this->type = type;
-		this->serial_number = serial_number;
-		this->owner = owner;
-		this->type_of_ink = type_of_ink;
+		SetInkColor(ink_color);
+		SetType(type);
+		SetSerialNumber(serial_number);
+		SetOwner(owner);
+		SetTypeOfInk(type_of_ink);
 	}
 	void ShowObjectData() const
 	{
@@ -79,14 +88,23 @@ private:
 	string serial_number;
 	string owner;
 public:
+	Laptop()
+	{
+		SetProcessor("processor");
+		SetMemory(16);
+		SetStaticMemory(1000);
+		SetVideocard("videocard");
+		SetSerialNumber("serial_number");
+		SetOwner("owner");
+	}
 	Laptop(string processor, int memory, int static_memory, string videocard, string serial_number, string owner)
 	{
-		this->processor = processor;
-		this->memory = memory;
-		this->static_memory = static_memory;
-		this->videocard = videocard;
-		this->serial_number = serial_number;
-		this->owner = owner;
+		SetProcessor(processor);
+		SetMemory(memory);
+		SetStaticMemory(static_memory);
+		SetVideocard(videocard);
+		SetSerialNumber(serial_number);
+		SetOwner(owner);
 	}
 	void ShowObjectData() const
 	{
@@ -158,13 +176,21 @@ private:
 	bool passport;
 	short length_of_tail;
 public:
+	Cat()
+	{
+		SetColor("color");
+		SetBreed("breed");
+		SetColorOfEyes("color_of_eyes");
+		SetPassport(true);
+		SetLengthOfTail(15);
+	}
 	Cat(string color, string breed, string color_of_eyes, bool passport, short length_of_tail)
 	{
-		this->color = color;
-		this->breed = breed;
-		this->color_of_eyes = color_of_eyes;
-		this->passport = passport;
-		this->length_of_tail = length_of_tail;
+		SetColor(color);
+		SetBreed(breed);
+		SetColorOfEyes(color_of_eyes);
+		SetPassport(passport);
+		SetLengthOfTail(length_of_tail);
 	}
 	void ShowObjectData() const
 	{
@@ -234,15 +260,26 @@ private:
 	int health = 100;
 	int energy = 100;
 public:
+	Person()
+	{
+		SetName("name");
+		SetSurname("surname");
+		SetAge(18);
+		SetWeight(75);
+		SetMoney(10000);
+		SetHealth(100);
+		SetEnergy(100);
+	}
+
 	Person(string name, string surname, int age, double weight, double money, int health = 100, int energy = 100)
 	{
-		this->name = name;
-		this->surname = surname;
-		this->age = age;
-		this->weight = weight;
-		this->money = money;
-		this->health = health;
-		this->energy = energy;
+		SetName(name);
+		SetSurname(surname);
+		SetAge(age);
+		SetWeight(weight);
+		SetMoney(money);
+		SetHealth(health);
+		SetEnergy(energy);
 	}
 
 	void print() const
@@ -272,6 +309,36 @@ public:
 		this->money = money;
 	}
 
+	void SetAge(short age)
+	{
+		this->age = age;
+	}
+
+	short GetAge()
+	{
+		return this->age;
+	}
+
+	void SetWeight(double weight)
+	{
+		this->weight = weight;
+	}
+
+	double GetWeight()
+	{
+		return this->weight;
+	}
+
+	void SetEnergy(int energy)
+	{
+		this->energy = energy;
+	}
+
+	int GetEnergy()
+	{
+		return this->energy;
+	}
+
 	void AddMoney(double money)
 	{
 		this->money += money;
@@ -294,6 +361,7 @@ public:
 		return *this;
 	}
 
+
 	Person& SetHealth(int health)
 	{
 		this->health = health;
@@ -309,6 +377,8 @@ public:
 	{
 		return this->name;
 	}
+
+
 };
 
 class Jacket
@@ -320,13 +390,21 @@ private:
 	string material;
 	bool still_being_produced;
 public:
+	Jacket()
+	{
+		SetBrand("brand");
+		SetModel("model");
+		SetMaterial("material");
+		SetSize("XS");
+		SetStillBeingProduced(true);
+	}
 	Jacket(string brand, string model, string size, string material, bool still_being_produced)
 	{
-		this->brand = brand;
-		this->model = model;
-		this->size = size;
-		this->material = material;
-		this->still_being_produced = still_being_produced;
+		SetBrand(brand);
+		SetModel(model);
+		SetMaterial(material);
+		SetSize(size);
+		SetStillBeingProduced(still_being_produced);
 	}
 	void ShowObjectData() const
 	{
