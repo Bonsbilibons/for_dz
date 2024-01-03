@@ -10,14 +10,11 @@ private:
 	string owner;
 	string type_of_ink;
 public:
-	Pencil()
+	~Pencil()
 	{
-		SetInkColor("Black");
-		SetType("Ball-point");
-		SetSerialNumber("12345qwert");
-		SetOwner("Person");
-		SetTypeOfInk("Gell");
+
 	}
+	Pencil() : Pencil("Black", "Ball-point", "12345qwert", "Person", "Gell" ) {}
 
 	Pencil(string ink_color, string type, string serial_number, string owner, string type_of_ink)
 	{
@@ -88,15 +85,8 @@ private:
 	string serial_number;
 	string owner;
 public:
-	Laptop()
-	{
-		SetProcessor("processor");
-		SetMemory(16);
-		SetStaticMemory(1000);
-		SetVideocard("videocard");
-		SetSerialNumber("serial_number");
-		SetOwner("owner");
-	}
+	Laptop() : Laptop("processor", 16, 1000, "videocard", "serial_number", "owner"){}
+
 	Laptop(string processor, int memory, int static_memory, string videocard, string serial_number, string owner)
 	{
 		SetProcessor(processor);
@@ -170,21 +160,28 @@ public:
 class Cat
 {
 private:
-	string color;
+	string* color = new string[3];
 	string breed;
 	string color_of_eyes;
 	bool passport;
 	short length_of_tail;
 public:
+	~Cat()
+	{
+		if (color != nullptr)
+		{
+			delete[] color;
+		}
+	}
 	Cat()
 	{
-		SetColor("color");
+		//SetColor(["color", "black", "red"]);
 		SetBreed("breed");
 		SetColorOfEyes("color_of_eyes");
 		SetPassport(true);
 		SetLengthOfTail(15);
 	}
-	Cat(string color, string breed, string color_of_eyes, bool passport, short length_of_tail)
+	Cat(string color[3], string breed, string color_of_eyes, bool passport, short length_of_tail)
 	{
 		SetColor(color);
 		SetBreed(breed);
@@ -200,13 +197,16 @@ public:
 		cout << "Passport: " << (this->passport ? "Yes" : "No") << "\n";
 		cout << "Length of Tail: " << this->length_of_tail << " cm\n";
 	}
-	void SetColor(string color_value)
+	void SetColor(const string color_value[3])
 	{
-		this->color = color_value;
+		this->color[0] = color_value[0];
+		this->color[1] = color_value[1];
+		this->color[2] = color_value[2];
+		//this->color = color_value2
 	}
 	string GetColor() const
 	{
-		return this->color;
+		return *color;
 	}
 	void SetBreed(string breed_value)
 	{
@@ -293,11 +293,11 @@ public:
 		cout << "Energy: " << this->energy << "\n";
 	}
 
-	void PaintCat(Cat& cat, string color)
+	/*void PaintCat(Cat& cat, string color)
 	{
 		cat.SetColor(color);
 		cout << "Cat is angry! It`s new color is " << cat.GetColor() << "\n";
-	}
+	}*/
 
 	void ChangeInkInPencil(Pencil& pencil, string color)
 	{
