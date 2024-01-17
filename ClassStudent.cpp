@@ -1,399 +1,457 @@
 #include <iostream>
+#include <ctime>
+#include <fstream>
+#include <string>
+#include <chrono>
 using namespace std;
 
-class Date
+class Logger
 {
-private:
-	short day;
-	short month;
-	short year;
+    static Logger* instance;
+    int log_сount = 0;
+
+    Logger()
+    {
+    }
+
 public:
-	Date() 
-	{
-		SetDay(1);
-		SetMonth(1);
-		SetYear(2024);
-	}
+    static Logger* GetInstance()
+    {
+        return instance == nullptr ? instance = new Logger() : instance;
+    }
 
-	Date(short day, short month, short year)
-	{
-		SetDay(day);
-		SetMonth(month);
-		SetYear(year);
-	}
+    void Write(string message)
+    {
+        log_сount++;
+        ofstream output_file("log.txt", ios::app);
+        if (output_file.is_open()) {
+            output_file << message << "\n";
+            output_file.close();
+        }
+    }
+};
+Logger* Logger::instance = nullptr;
 
-	~Date() { }
+class Date {
+    unsigned short day;
+    unsigned short month;
+    long long year;
+public:
+    Date() : Date(23, 12, 2023) {}
 
-	void ShowData()
-	{
-		cout << GetDay() << "." << GetMonth() << "." << GetYear() << "\n";
-	}
-
-	void SetDay(short day) 
-	{
-		if (day > 31)
-		{
-			throw "Wrong day";
-		}
-		this->day = day;
-	}
-
-	void SetMonth(short month) 
-	{
-		if (month > 12)
-		{
-			throw "Wrong month";
-		}
-		this->month = month;
-	}
-
-	void SetYear(short year) 
-	{
-		this->year = year;
-	}
-
-	short GetMonth() {
-		return this->month;
-	}
-
-	short GetDay() 
-	{
-		return this->day;
-	}
-
-	short GetYear() 
-	{
-		return this->year;
-	}
+    Date(unsigned short day, unsigned short month, long long year)
+    {
+        SetDay(day);
+        SetMonth(month);
+        SetYear(year);
+    }
+    Date(unsigned short day, unsigned short month) : Date(day, month, 2005) {}
 
 
+    void PrintDate() const
+    {
+        cout << day << "." << month << "." << year << "\n";
+    }
+    //day SetGet
+    void SetDay(unsigned short day)
+    {
+        if (day == 0 || day > 31) throw "ERROR!!! The day must be from 0 to 31 !!!";
+        this->day = day;
+    }
+    unsigned short GetDay() const
+    {
+        return day;
+    }
+    //month SetGet
+    void SetMonth(unsigned short month)
+    {
+        if (month == 0 || month > 12) throw "ERROR!!! The day must be from 1 to 12 !!!";
+        this->month = month;
+    }
+    unsigned short GetMonth() const
+    {
+        return month;
+    }
+    //year SetGet
+    void SetYear(long long year)
+    {
+        this->year = year;
+    }
+    long long GetYear() const
+    {
+        return year;
+    }
 };
 
-class Student
+class Student {
+private:
+    string surname;
+    string name;
+    string middlename;
+    string adress;
+    string phonenumber;
+    unsigned int countpractic = 0;
+    unsigned int counthomework = 0;
+    unsigned int countexam = 0;
+    int* grade_of_practic = new int[countpractic];
+    int* grade_of_homework = new int[counthomework];
+    int* grade_of_exam = new int[countexam];
+    static unsigned int count;
+
+public:
+    Student(const Student& original)
+    {
+        Logger::GetInstance()->Write("User copied now");
+        count++;
+
+        this->surname = original.surname;
+        this->name = original.name;
+        this->middlename = original.middlename;
+        this->adress = original.adress;
+        this->phonenumber = original.phonenumber;
+        this->countpractic = original.countpractic;
+        this->counthomework = original.counthomework;
+        this->countexam = original.countexam;
+
+        this->grade_of_practic = new int[original.countpractic];
+        for (int i = 0; i < countpractic; i++)
+        {
+            this->grade_of_practic[i] = original.grade_of_practic[i];
+        }
+
+        this->grade_of_homework = new int[original.counthomework];
+        for (int i = 0; i < counthomework; i++)
+        {
+            this->grade_of_homework[i] = original.grade_of_homework[i];
+        }
+
+        this->grade_of_exam = new int[original.countexam];
+        for (int i = 0; i < countexam; i++)
+        {
+            this->grade_of_exam[i] = original.grade_of_exam[i];
+        }
+    }
+
+    Student() : Student("Studenchenko", "Student", "Studentovich", "Studencheskaya 38", "0630300033") { count++; }
+
+    Student(string surname, string name, string middlname, string adress, string phonenumber)
+    {
+        /*auto end = std::chrono::system_clock::now();
+        std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+        std::string logMessage = "Student created at " + std::ctime(&end_time);
+        logMessage.pop_back();
+        Logger::GetInstance()->Write(logMessage);*/
+        Logger::GetInstance()->Write("User created now");
+
+        count++;
+        SetSurname(surname);
+        SetName(name);
+        SetMiddlName(middlname);
+        SetAdress(adress);
+        SetPhone(phonenumber);
+    }
+    Student(string surname, string name, string middlname, string adress) :Student(surname, name, middlename, adress, "0687680685") { count++; }
+
+    ~Student()
+    {
+        Logger::GetInstance()->Write("User deleted now");
+        if (grade_of_practic != nullptr)
+            delete[] grade_of_practic;
+        if (grade_of_homework != nullptr)
+            delete[] grade_of_homework;
+        if (grade_of_exam != nullptr)
+            delete[] grade_of_exam;
+        count--;
+    }
+
+    static unsigned int GetCount()
+    {
+        return count;
+    }
+
+    void PrintStudent() const
+    {
+        cout << "Surname: " << surname << "\n";
+        cout << "Name: " << name << "\n";
+        cout << "Midlname: " << middlename << "\n";
+        cout << "Adress: " << adress << "\n";
+        cout << "Phonnumber: " << phonenumber << "\n";
+    }
+
+    void AddPractic(int newcountry)
+    {
+        int* temp = new int[countpractic + 1];
+        for (int i = 0; i < countpractic; i++)
+        {
+            temp[i] = grade_of_practic[i];
+        }
+
+        temp[countpractic] = newcountry;
+        countpractic++;
+        delete[]grade_of_practic;
+        grade_of_practic = temp;
+    }
+
+    void PrintPractic() const
+    {
+        for (int i = 0; i < countpractic; i++)
+        {
+            cout << grade_of_practic[i] << ", ";
+        }
+    }
+
+    int GetPracticRatesCount(unsigned int index) const
+    {
+        if (index < countpractic)
+        {
+            return grade_of_practic[index];
+        }
+    }
+
+    void AddHomeWork(int newcountry)
+    {
+        int* temp = new int[counthomework + 1];
+        for (int i = 0; i < counthomework; i++)
+        {
+            temp[i] = grade_of_homework[i];
+        }
+        temp[counthomework] = newcountry;
+        counthomework++;
+        delete[]grade_of_homework;
+        grade_of_homework = temp;
+    }
+
+    void PrintHomeWork() const
+    {
+        for (int i = 0; i < counthomework; i++)
+        {
+            cout << grade_of_homework[i] << ", ";
+        }
+    }
+
+    int GetHomeWorkRatesCount(unsigned int index) const
+    {
+        if (index < counthomework)
+        {
+            return grade_of_homework[index];
+        }
+    }
+
+    void AddExam(int newcountry)
+    {
+        int* temp = new int[countexam + 1];
+        for (int i = 0; i < countexam; i++)
+        {
+            temp[i] = grade_of_exam[i];
+        }
+        temp[countexam] = newcountry;
+        countexam++;
+        delete[]grade_of_exam;
+        grade_of_exam = temp;
+    }
+
+    void PrintExam() const
+    {
+        for (int i = 0; i < countexam; i++)
+        {
+            cout << grade_of_exam[i] << ", ";
+        }
+    }
+
+    int GetExamRatesCount(unsigned int index) const
+    {
+        if (index < countexam)
+        {
+            return grade_of_exam[index];
+        }
+    }
+
+    void SetSurname(string surname)
+    {
+        this->surname = surname;
+    }
+
+    string GetSurname() const
+    {
+        return surname;
+    }
+
+    void SetName(string name)
+    {
+        this->name = name;
+    }
+
+    string GetName() const
+    {
+        return name;
+    }
+
+    void SetMiddlName(string middlname)
+    {
+        this->middlename = middlname;
+    }
+
+    string GetMiddlName() const
+    {
+        return middlename;
+    }
+
+    void SetAdress(string adress)
+    {
+        this->adress = adress;
+    }
+
+    string GetAdress() const
+    {
+        return adress;
+    }
+
+    void SetPhone(string phonenumber)
+    {
+        this->phonenumber = phonenumber;
+    }
+
+    string GetPhone() const
+    {
+        return phonenumber;
+    }
+};
+unsigned int Student::count;
+
+class Group
 {
 private:
-	string surname;
-	string name;
-	string second_name;
-	Date birthday;
-	Date date_of_entry;
-	string adress;
-	string phone_number;
-	int count_of_practicals;
-	int count_of_homeworks;
-	int count_of_exams;
-	string* practicals;
-	string* homeworks;
-	string* exams;
-
-	void SetCountOfPracticals(int count_of_practicals)
-	{
-		this->count_of_practicals = count_of_practicals;
-	}
-	int GetCountOfPracticals()
-	{
-		return this->count_of_practicals;
-	}
-
-	void SetCountOfHomeworks(int count_of_homeworks)
-	{
-		this->count_of_homeworks = count_of_homeworks;
-	}
-	int GetCountOfHomeworks()
-	{
-		return this->count_of_homeworks;
-	}
-
-	void SetCountOfExams(int count_of_exams)
-	{
-		this->count_of_exams = count_of_exams;
-	}
-	int GetCountOfExams()
-	{
-		return this->count_of_exams;
-	}
+    int countOfStudents;
+    Student** students = nullptr;
+    string name;
+    string occupation;
+    int course;
 public:
-	Student()
-	{
-		Date birthday(1, 1, 2000);
-		Date entry(1, 1, 2015);
-		SetName("name");
-		SetSurname("surname");
-		SetSecondName("second_name");
-		SetBirthday(birthday);
-		SetDateOfEntry(entry);
-		SetAdress("adress");
-		SetPhoneNumber("number");
-	}
+    ~Group()
+    {
+        if (students != nullptr) {
+            delete[] students;
+        }
+    }
+    
+    Group() {
+        this->countOfStudents = 0;
+        this->name = "name";
+        this->occupation = "occupation";
+        this->course = 1;
+    }
 
-	Student(
-		string name, string surname, string second_name,
-		Date birthday, Date date_of_entry,
-		string adress, string phone_number
-	)
-	{
-		SetName(name);
-		SetSurname(surname);
-		SetSecondName(second_name);
-		SetBirthday(birthday);
-		SetDateOfEntry(date_of_entry);
-		SetAdress(adress);
-		SetPhoneNumber(phone_number);
-	}
+    Group(const Group& original)
+    {
+        this->countOfStudents = original.countOfStudents;
+        this->name = original.name;
+        this->occupation = original.occupation;
 
-	Student(
-		string name, string surname, string second_name,
-		Date birthday, Date date_of_entry,
-		string adress, string phone_number,
-		int count_of_practicals, string practicals[],
-		int count_of_homeworks, string homeworks[],
-		int count_of_exams, string exams[]
-	)
-	{
-		SetName(name);
-		SetSurname(surname);
-		SetSecondName(second_name);
-		SetBirthday(birthday);
-		SetDateOfEntry(date_of_entry);
-		SetAdress(adress);
-		SetPhoneNumber(phone_number);
-		SetPracticals(practicals, count_of_practicals);
-		SetHomeworks(homeworks, count_of_homeworks);
-		SetExams(exams, count_of_exams);
-	}
+        this->students = new Student*[original.countOfStudents];
+        for (int i = 0; i < countOfStudents; i++)
+        {
+            this->students[i] = new Student(*(original.students[i]));
+        }
+    }
 
-	~Student()
-	{
-		if (practicals != nullptr)
-		{
-			delete[] practicals;
-		}
-		if (homeworks != nullptr)
-		{
-			delete[] homeworks;
-		}
-		if (exams != nullptr)
-		{
-			delete[] exams;
-		}
-	}
+    void SetName(string name)
+    {
+        this->name = name;
+    }
+    string GetName()
+    {
+        return this->name;
+    }
 
-	void ShowData()
-	{
-		cout << "Name: " << GetName() << "\n";
-		cout << "Surname: " << GetSurname() << "\n";
-		cout << "Second name: " << GetSecondName() << "\n";
-		cout << "Birthday: ";
-		this->birthday.ShowData();
-		cout << "Date of entry: ";
-		this->date_of_entry.ShowData();
-		cout << "Adress: " << GetAdress() << "\n";
-		cout << "Phone number: " << GetPhoneNumber() << "\n";
-		cout << "Practicals: ";
-		ShowPracticals();
-		cout << "\n";
-		cout << "Homeworks: ";
-		ShowHomeworks();
-		cout << "\n";
-		cout << "Exams";
-		ShowExams();
-	}
+    void SetOccupation(string occupation)
+    {
+        this->occupation = occupation;
+    }
+    string GetOccupation()
+    {
+        return this->occupation;
+    }
 
-	void SetSurname(string surname)
-	{
-		this->surname = surname;
-	}
-	string GetSurname()
-	{
-		return this->surname;
-	}
+    void SetCourse(int course)
+    {
+        this->course = course;
+    }
+    int GetCourse()
+    {
+        return this->course;
+    }
 
-	void SetName(string name)
-	{
-		this->name = name;
-	}
-	string GetName()
-	{
-		return this->name;
-	}
-	
-	void SetSecondName(string second_name)
-	{
-		this->second_name = second_name;
-	}
-	string GetSecondName()
-	{
-		return this->second_name;
-	}
+    int GetCountOfStudents()
+    {
+        return this->countOfStudents;
+    }
 
-	void SetBirthday(Date birthday)
-	{
-		this->birthday = birthday;
-	}
-	Date GetBirthday()
-	{
-		return this->birthday;
-	}
+    void ShowStudents()
+    {
+        if (this->students != nullptr) {
+            for (int i = 0; i < countOfStudents; i++) {
+                this->students[i]->PrintStudent();
+            }
+        };
+    }
 
-	void SetDateOfEntry(Date date_of_entry)
-	{
-		this->date_of_entry = date_of_entry;
-	}
-	Date GetDateOfEntry()
-	{
-		return this->date_of_entry;
-	}
+    void AddStudent(const Student& student)
+    {
+        Student** newStudents = new Student*[this->countOfStudents + 1];
+        for (int i = 0; i < this->countOfStudents; i++) {
+            newStudents[i] = students[i];
+        }
+        newStudents[countOfStudents] = new Student(student);
 
-	void SetAdress(string adress)
-	{
-		this->adress = adress;
-	}
-	string GetAdress()
-	{
-		return this->adress;
-	}
-	
-	void SetPhoneNumber(string phone_number)
-	{
-		this->phone_number = phone_number;
-	}
-	string GetPhoneNumber()
-	{
-		return this->phone_number;
-	}
+        this->students = newStudents;
+        this->countOfStudents++;
+    }
 
-	void SetPracticals(string practicals[], int count)
-	{
-		delete[] this->practicals;
-		SetCountOfPracticals(count);
-		this->practicals = new string[count];
-		for (int i = 0; i < count; i++) {
-			this->practicals[i] = practicals[i];
-		}
-	}
-	string GetPracticals()
-	{
-		string array;
-		for (int i = 0; i < GetCountOfPracticals(); i++) {
-			array += this->practicals[i];
-		}
-		return array;
-	}
-	void ShowPracticals()
-	{
-		for (int i = 0; i < GetCountOfPracticals(); i++) {
-			cout << this->practicals[i] << " ";
-		}
-	}
-	string GetPracticalByNum(int number)
-	{
-		if (number < 0 || number > GetCountOfPracticals()) {
-			throw "Error index";
-		}
-		return this->practicals[number];
-	}
-	void AddPractical(string score)
-	{
-		string* array = new string[GetCountOfPracticals() + 1];
-		for (int i = 0; i < GetCountOfPracticals(); i++) {
-			array[i] = this->practicals[i];
-		}
-		array[GetCountOfPracticals()] = score;
-		SetPracticals(array, GetCountOfPracticals() + 1);
-		delete[] array;
-	}
+    Student* GetStudentByIndex(int index)
+    {
+        return this->students[index];
+    }
 
-	void SetHomeworks(string homeworks[], int count)
-	{
-		delete[] this->homeworks;
-		SetCountOfHomeworks(count);
-		this->homeworks = new string[count];
-		for (int i = 0; i < count; i++) {
-			this->homeworks[i] = homeworks[i];
-		}
-	}
-	string GetHomeworks()
-	{
-		string array;
-		for (int i = 0; i < GetCountOfHomeworks(); i++) {
-			array += this->homeworks[i];
-		}
-		return array;
-	}
-	void ShowHomeworks()
-	{
-		for (int i = 0; i < GetCountOfHomeworks(); i++) {
-			cout << this->homeworks[i] << " ";
-		}
-	}
-	string GetHomeworkByNum(int number)
-	{
-		if (number < 0 || number >= GetCountOfHomeworks()) {
-			throw "Error index";
-		}
-		return this->homeworks[number];
-	}
-	void AddHomework(string homework)
-	{
-		string* array = new string[count_of_homeworks + 1];
-		for (int i = 0; i < GetCountOfHomeworks(); i++) {
-			array[i] = this->homeworks[i];
-		}
-		array[GetCountOfHomeworks()] = homework;
-		SetHomeworks(array, GetCountOfHomeworks() + 1);
-		delete[] array;
-	}
+    void Append(Group& group)
+    {
+        int newCountOfStudents = this->countOfStudents + group.GetCountOfStudents();
+        Student** newGroup = new Student*[newCountOfStudents];
+        for (int i = 0; i < this->countOfStudents; i++) {
+            newGroup[i] = this->students[i];
+        }
+        for (int i = 0; i < group.GetCountOfStudents(); i++) {
+            newGroup[this->countOfStudents + i] = group.GetStudentByIndex(i);
+        }
 
-	void SetExams(string exams[], int count)
-	{
-		delete[] this->exams;
-		SetCountOfExams(count);
-		this->exams = new string[count];
-		for (int i = 0; i < count; i++) {
-			this->exams[i] = exams[i];
-		}
-	}
-	string GetExams()
-	{
-		string array;
-		for (int i = 0; i < GetCountOfExams(); i++) {
-			array += this->exams[i];
-		}
-		return array;
-	}
-	void ShowExams()
-	{
-		for (int i = 0; i < GetCountOfExams(); i++) {
-			cout << this->exams[i] << " ";
-		}
-	}
-	string GetExamByNum(int number)
-	{
-		if (number < 0 || number >= GetCountOfExams()) {
-			throw "Error index";
-		}
-		return this->exams[number];
-	}
-	void AddExam(string exam)
-	{
-		string* array = new string[GetCountOfExams() + 1];
-		for (int i = 0; i < GetCountOfExams(); i++) {
-			array[i] = exams[i];
-		}
-		array[GetCountOfExams()] = exam;
-		SetExams(array, GetCountOfExams() + 1);
-		delete[] array;
-	}
+        this->students = newGroup;
+        this->countOfStudents = newCountOfStudents;
+    }
 };
 
 int main()
 {
-	string practicals[3] = {"12", "NZ", "9"};
-	string homeworks[5] = {"10", "NZ", "11", "7", "9"};
-	string exams[2] = {"12", "13"};
-	Date birthday(1, 1, 2000);
-	Date entry(2, 2, 2014);
-	Student student("Sasha", "Sashkovich", "Alexandr", birthday, entry, "Baraholka", "43124242432", 3 , practicals, 5, homeworks, 2, exams);
-	student.ShowData();
+    Student student1;
+    Student student2;
+    Student student3;
 
+    Group group;
+    group.ShowStudents();
+    group.AddStudent(student1);
+    group.AddStudent(student2);
+    group.AddStudent(student3);
+
+    Student student4;
+    Student student5;
+    Student student6;
+
+    Group group2;
+    group2.AddStudent(student4);
+    group2.AddStudent(student5);
+    group2.AddStudent(student6);
+
+
+    group.Append(group2);
+    group.ShowStudents();
+
+    cout << Student::GetCount() << "\n";
 }
